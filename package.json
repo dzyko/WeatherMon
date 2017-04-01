@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress",
+    "server": "webpack-dev-server --history-api-fallback --inline --progress --https",
     "start": "npm run server"
   },
   "repository": {
@@ -19,11 +19,7 @@
   },
   "homepage": "https://github.com/dzyko/WeatherMon#readme",
   "dependencies": {
-    "angular": "^1.5.11",
-    "angular-ui-router": "^0.2.18",
-    "bootstrap": "^3.3.6",
-    "require-css": "^0.1.10",
-    "requirejs": "^2.3.3"
+    "angular": "^1.5.11"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",

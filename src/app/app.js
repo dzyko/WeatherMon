@@ -29,6 +29,13 @@ define(['angular', 'services/geolocation.service'], function (angular, GeoLocati
       constructor($http, GeoLocation) {
         console.log('AppCtrl');
         // console.log($http);
+        GeoLocation.getLocation()
+        .then(
+          resp=>{
+            console.log(resp);
+          },
+          err=>console.log(err)
+        );
       }
     }
     AppCtrl.$inject = ['$http', 'GeoLocation'];
