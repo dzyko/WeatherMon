@@ -1,10 +1,11 @@
 define([
   'app',
   '../../services/geoLocation.service',
-  '../../services/openWeather.service'
+  '../../services/openWeather.service',
+  '../../services/accuWeather.service'
 ], (app) => {
     class OutsideWeatherCtrl {
-      constructor($http, $interval, GeoLocation, OpenWeather) {//
+      constructor($http, $interval, GeoLocation, OpenWeather, AccuWeather) {//
         console.log('========= <outside-weather> component constructor()=========');
 
         // this.$onInit = () => {
@@ -12,13 +13,39 @@ define([
         // this.$onDestroy = () => {
         // };
 
-        // GeoLocation.getLocation()
-        // .then(
-        //   resp=>{
-        //     console.log(resp);
-        //   },
-        //   err=>console.log(err)
-        // );
+        let self = this;
+        this.AccuWeather = AccuWeather;
+        
+        this.near_location = {};
+        this.watched_weather = {};
+
+
+        GeoLocation.getLocation()
+        .then(
+          position=>{
+              console.log("||||||||||position||||||||||||");
+              console.log(position);
+              // position.coords.latitude;
+              // position.coords.longitude;
+              AccuWeather.getLocationCityByCoord(position.coords.latitude, position.coords.longitude)
+              .then(
+                resp => {
+                  self.near_location = resp.data;
+                  self.updateWeather();
+                  $interval(()=>{
+                    self.updateWeather();
+                    // console.log(self.updateInterval);
+                  }, self.updateInterval);
+                },
+                err => console.log(err)
+              );
+              
+
+          },
+          err=>console.log(err)
+        );
+
+        
 
         // OpenWeather.weatherByCoord()
         // .then(
@@ -29,9 +56,23 @@ define([
         // );
         
       }
+
+      updateWeather(){
+        let self = this;
+        self.AccuWeather.getCurrentWeatherByLocationKey(self.near_location.Key)
+        .then(
+            resp=>{
+              console.log(resp);
+              if(resp.data && resp.data.length>0) {
+                self.watched_weather = resp.data[0];
+              }
+            },
+            err => console.log(err)
+        );
+      }
     };
 
-    OutsideWeatherCtrl.$inject = ['$http', '$interval', 'GeoLocation', 'OpenWeather'];//
+    OutsideWeatherCtrl.$inject = ['$http', '$interval', 'GeoLocation', 'OpenWeather', 'AccuWeather'];//
     
     let outsideWeather = () => {
       return {

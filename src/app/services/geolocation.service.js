@@ -1,11 +1,10 @@
 define(['app'], (app) => {
-        // console.log('========= app geo =========');
-        // console.log(app);
-        
+
    class GeoLocation {
-        constructor(/*$http*/) {
+        constructor($http) {
             console.log('========= GeoLocation service constructor()=========');
             // console.log($http);
+            this.$http = $http;
         }
 
         getLocation(){
@@ -24,6 +23,11 @@ define(['app'], (app) => {
             return promise;
         }
 
+        getGeoDataClient(){
+            // let self = this;
+            return this.$http.get('https://freegeoip.net/json/');
+        }
+
         // getLocationWithInterval() {
         //     var myObservable = Rx.Observable.create(observer => {
         //     observer.next('foo');
@@ -36,7 +40,8 @@ define(['app'], (app) => {
         //     }, 10000);
         // }
     }
-    // GeoLocation.$inject = ['$http'];
+    GeoLocation.$inject = ['$http'];
+
     // return GeoLocation;
     app.service('GeoLocation', GeoLocation);
 });

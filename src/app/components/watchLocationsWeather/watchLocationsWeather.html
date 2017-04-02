@@ -1,4 +1,62 @@
-<div>
+<!--<div>
 <h1>Watch locations weather ...</h1>
 <p>Список пуст</p>
-</div>
+</div>-->
+
+<!--https://vortex.accuweather.com/adc2010/images/slate/icons/11.svg-->
+
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="wlw.search_text" placeholder="Строка поиска ...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="wlw.SearchCity(wlw.search_text)">Найти</button>
+        </span>
+    </div>
+
+    <div class="list-group">
+        <a ng-repeat="item in wlw.searched_locations" href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">{{item.Type=='City'?'Город':item.Type}}: {{item.LocalizedName}}</h4>
+            <p class="list-group-item-text">Страна:{{item.Country.LocalizedName}} {{item.AdministrativeArea.LocalizedType}}:{{item.AdministrativeArea.LocalizedName}}</p>
+            <button ng-click="wlw.addSelectedLocation(item)">Добавить</button>
+        </a>
+    </div>
+
+
+<hr>
+<h1>Отслеживаемый список городов:</h1>
+    <div class="list-group">
+        <div class="row list-group-item" ng-repeat="item in wlw.locations">
+            <div class="col-md-4">
+                <h4 class="list-group-item-heading">{{item.Type=='City'?'Город':item.Type}}: {{item.LocalizedName}}</h4>
+                <p class="list-group-item-text">Страна:{{item.Country.LocalizedName}} {{item.AdministrativeArea.LocalizedType}}:{{item.AdministrativeArea.LocalizedName}}</p>
+                <button class="btn btn-default" ng-click="wlw.removeStoredLocations(item)">Удалить</button>
+            </div>
+            <div class="col-md-1">
+                <img style="height:100px;" ng-src="https://vortex.accuweather.com/adc2010/images/slate/icons/{{('0'+wlw.watchWeather(item.Key).WeatherIcon).slice(-2)}}.svg"/>
+            </div>
+            <div class="col-md-7">
+                <p>{{wlw.watchWeather(item.Key).WeatherText}}</p>
+                <p>{{wlw.watchWeather(item.Key).Temperature.Metric.Value}} &#8451;</p>
+                <p>Ветер {{wlw.watchWeather(item.Key).Wind.Speed.Metric.Value + ' ' + wlw.watchWeather(item.Key).Wind.Speed.Metric.Unit}} Направление {{wlw.watchWeather(item.Key).Wind.Direction.Localized}}</p>
+            </div>
+        </div>
+    </div>
+
+    <!--background-image: url(https://vortex.accuweather.com/adc2010/images/slate/icons/11.svg);
+    background-repeat: no-repeat;-->
+
+      <!--<button class="btn btn-primary" ng-click="wlw.SearchCity()">Поиск города</button>-->
+
+<!--<label for="repeatSelect"> Repeat select: </label>-->
+
+
+
+<!--<select ng-model="wlw.selected_location" class="form-control">
+    <option ng-repeat="item in wlw.locations" value="{{item.Key}}">Страна:{{item.Country.LocalizedName}} {{item.AdministrativeArea.LocalizedType}}:{{item.AdministrativeArea.LocalizedName}} {{item.Type=='City'?'Город':'item.Type'}}: {{item.LocalizedName}}</option>
+</select>-->
+
+<!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+  <li class="dropdown-header">Dropdown header</li>
+</ul>-->
+
+
+

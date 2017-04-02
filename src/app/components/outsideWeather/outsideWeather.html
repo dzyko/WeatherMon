@@ -1,4 +1,12 @@
-<div>
-<h1>Outside weather ...</h1>
-<p>Интервал обновления погоды: {{ow.updateInterval}}</p>
+<h1>Погода на улице</h1>
+<p>Интервал обновления погоды: {{ow.updateInterval/1000}} секунд</p>
+<div class="row">
+            <div class="col-md-1">
+                <img style="height:100px;" ng-src="https://vortex.accuweather.com/adc2010/images/slate/icons/{{('0'+ow.watched_weather.WeatherIcon).slice(-2)}}.svg"/>
+            </div>
+            <div class="col-md-7">
+                <p>{{ow.watched_weather.WeatherText}}</p>
+                <p>{{ow.watched_weather.Temperature.Metric.Value}} &#8451;</p>
+                <p>Ветер {{ow.watched_weather.Wind.Speed.Metric.Value + ' ' + ow.watched_weather.Wind.Speed.Metric.Unit}} Направление {{ow.watched_weather.Wind.Direction.Localized}}</p>
+            </div>
 </div>
