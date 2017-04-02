@@ -1,6 +1,7 @@
 define(['app'], (app)=>{
-//https://dataservice.accuweather.com/locations/v1/cities/ipaddress?apikey=Yn1vuxrpDWFPd44yIgd3JVddpb8erVkV&q=109.184.80.226&language=ru-ru
-    const APIKEY = 'Yn1vuxrpDWFPd44yIgd3JVddpb8erVkV';
+    // const APIKEY = 'Yn1vuxrpDWFPd44yIgd3JVddpb8erVkV';
+    const APIKEY = 'fbWkOObNjtWyz0cHagLeEyG9PoQYHsl5';
+    
     const lang = 'ru-ru';
     class AccuWeather {
         constructor($http) {
@@ -22,8 +23,6 @@ define(['app'], (app)=>{
 
         getLocationCityByCoord(lat, lon){
             let lat_lon_encoded = encodeURIComponent(lat+','+lon);
-            console.log("***************getLocationCityByCoord************");
-            console.log(lat_lon_encoded);
             return this.$http.get(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${APIKEY}&q=${lat_lon_encoded}&language=${lang}`);
         }
 
