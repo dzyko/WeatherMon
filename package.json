@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/dzyko/WeatherMon#readme",
   "dependencies": {
-    "angular": "^1.5.11"
+    "angular": "^1.5.11",
+    "bootstrap": "^3.3.7"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",

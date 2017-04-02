@@ -15,8 +15,10 @@ import 'bootstrap/dist/css/bootstrap.css';
   // .config(routing);
 
 
-
-define(['angular', 'services/geolocation.service'], function (angular, GeoLocation) {
+define([
+  'angular'
+  ], 
+  function (angular) {
     let app = () => {
       return {
         template: require('./app.html'),
@@ -26,22 +28,39 @@ define(['angular', 'services/geolocation.service'], function (angular, GeoLocati
     };
 
     class AppCtrl {
-      constructor($http, GeoLocation) {
+      constructor($http, $interval) {
         console.log('AppCtrl');
         // console.log($http);
-        GeoLocation.getLocation()
-        .then(
-          resp=>{
-            console.log(resp);
-          },
-          err=>console.log(err)
-        );
+
+        // GeoLocation.getLocation()
+        // .then(
+        //   resp=>{
+        //     console.log(resp);
+        //   },
+        //   err=>console.log(err)
+        // );
+
+        // OpenWeather.weatherByCoord()
+        // .then(
+        //   resp=>{
+        //     console.log(resp);
+        //   },
+        //   err=>console.log(err)
+        // );
+        
       }
     }
-    AppCtrl.$inject = ['$http', 'GeoLocation'];
+    AppCtrl.$inject = ['$http', '$interval'];
 
-    return angular
-      .module('app', [])
-      .directive('app', app)
-      .service('GeoLocation', GeoLocation.default);
+    let mod = angular.module('app', []);
+
+    mod.directive('app', app);
+
+    // mod.component('outsideweather', outsideWeather());
+    // .service('GeoLocation', geolocation.default)
+    // .service('OpenWeather', openweather.default)
+    return mod;
+
 });
+
+

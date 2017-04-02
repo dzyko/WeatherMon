@@ -15,12 +15,17 @@
 //     // }    
 // });
 
-require(['app', 'angular'], function (app, angular) {
-    angular.bootstrap(document, ['app']);
-});
+    // 
 
-// if (typeof define !== 'function') {
-//     var define = require('amdefine')(module);
-// }
+require([
+    'angular',
+    'app',
+    'components/outsideWeather',
+    'components/watchLocationsWeather'
+    ], 
+    function (angular, app) {
+        angular.bootstrap(document, [app.name]);
+    }
+);
 
 
